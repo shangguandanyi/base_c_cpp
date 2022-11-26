@@ -1,0 +1,11 @@
+#uri
+uri=rtsp://admin@123456
+
+#algorithm
+algorithm=YoloV5
+
+#sink
+sink=video_sink
+
+#video_uri
+video_uri=rtmp://192.168.4.7:1935/test
