@@ -12,9 +12,9 @@
 #include <iostream>
 #include <thread>
 
-void thread_function()
+void thread_function(int a)
 {
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < a; i++)
     {
         std::cout << "Thread function executing!" << std::endl;
     }
@@ -23,7 +23,7 @@ void thread_function()
 // 使用函数指针创建多线程
 void test01()
 {
-    std::thread threadObj(thread_function);
+    std::thread threadObj(thread_function, 1);
     for (int i = 0; i < 10; i++)
     {
         std::cout << "MainThread executing!" << std::endl;
@@ -35,9 +35,9 @@ void test01()
 class DisplayThread
 {
 public:
-    void operator()()
+    void operator()(int a)
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < a; i++)
         {
             std::cout << "Thread function executing!" << std::endl;
         }
@@ -47,7 +47,7 @@ public:
 // 使用函数对象创建多线程
 void test02()
 {
-    std::thread threadObj((DisplayThread()));
+    std::thread threadObj((DisplayThread()), 1);
     for (int i = 0; i < 10; i++)
     {
         std::cout << "MainThread executing!" << std::endl;
@@ -59,8 +59,9 @@ void test02()
 // 使用 Lambda 函数创建线程
 void test03()
 {
-    std::thread threadObj([]{
-        std::cout << "this_thread id: " << std::this_thread::get_id() << std::endl;
+    std::thread threadObj([limit = 32]{
+        std::this_thread::sleep_for(std::chrono::milliseconds(50));
+        std::cout << "this_thread id: " << std::this_thread::get_id() << limit << std::endl;
     });
     std::cout << "threadObj id: " << threadObj.get_id() << std::endl;
     std::cout << "mainThread id: " << std::this_thread::get_id() << std::endl;
