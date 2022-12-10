@@ -36,7 +36,8 @@ void myPrintPerson(void *a)
 void test2()
 {
     struct Person p = {"aaa", 10};
-    myPrintPerson(&p);
+    // myPrintPerson(&p);
+    myPrint(&p, myPrintPerson);
 }
 
 int main(int argc, char const *argv[])

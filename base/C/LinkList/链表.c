@@ -65,6 +65,7 @@ void test1()
 int main(int argc, char const *argv[])
 {
     printf("%lu\n", sizeof(struct LinkNode));
+    test();
     test1();
     return 0;
 }
